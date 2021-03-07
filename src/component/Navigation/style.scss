@@ -1,8 +1,12 @@
 .nav-wrap {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
     background-color: #282c34;
 
     .nav-left-wrap {
-
         .nav-logo {
             height: 50px;
             width: 50px;

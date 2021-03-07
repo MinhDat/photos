@@ -1,6 +1,58 @@
 .card-wrap {
     width: 250px;
     padding: 0 8px 8px 8px;
+    position: relative;
+
+    .card-info {
+        position: absolute;
+        top: 0;
+        right: 8px;
+        left: 8px;
+        bottom: 8px;
+        background-color: black;
+        opacity: 0;
+        border-radius: 20px;
+        padding: 10px;
+
+        &:hover {
+            opacity: 0.7;
+        }
+
+        .card-unlike {
+            color: white;
+            font-size: 25px;
+        }
+
+        .card-like {
+            color: red;
+            font-size: 25px;
+        }
+
+        .card-remove {
+            color: white;
+            font-size: 22px;
+        }
+
+        .card-title {
+            display: inline-block;
+            background-color: white;
+            white-space: nowrap;
+            overflow: hidden !important;
+            text-overflow: ellipsis;
+            max-width: 120px;
+            margin: 0;
+            padding: 5px 10px 5px 10px;
+            border-radius: 20px;
+        }
+
+        .card-view {
+            color: white;
+            font-size: 15px;
+            margin: 0;
+            padding: 5px 0 5px 0;
+        }
+    }
+
 
     .card-img {
         width: 250px;
