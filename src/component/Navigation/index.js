@@ -1,17 +1,30 @@
 /* eslint-disable jsx-a11y/alt-text */
 import Search from "component/Search";
+import { Link } from "react-router-dom";
 import "./style.scss";
 
-const Navigation = ({ setSearchText }) => (
-  <div className="nav-wrap flex spaceBetween">
-    <div className="nav-left-wrap flex">
-      <img className="nav-logo" src={require("resources/logo.svg").default} />
-      <h1 className="nav-title">Photos</h1>
-    </div>
-    <div className="nav-right-wrap">
-      <Search {...{ setSearchText }} />
-    </div>
-  </div>
-);
+export default function Navigation({ setSearchText }) {
+  return (
+    <div className="nav-wrap flex spaceBetween">
+      <div className="nav-left-wrap flex itemCenter">
+        <Link to="/" className="nav-link flex itemCenter">
+          <img
+            className="nav-logo"
+            src={require("resources/logo.svg").default}
+          />
+          <h1 className="nav-title">Photos</h1>
+        </Link>
+        <Link to="/like" className="nav-link">
+          <p className="nav-title">Likes</p>
+        </Link>
+        <Link to="/delete" className="nav-link">
+          <p className="nav-title">Deletes</p>
+        </Link>
+      </div>
 
-export default Navigation;
+      <div className="nav-right-wrap">
+        <Search {...{ setSearchText }} />
+      </div>
+    </div>
+  );
+}

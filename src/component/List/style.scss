@@ -1,0 +1,27 @@
+.list-wrap {
+    padding-bottom: 5px;
+    .list-img {
+        height: 80px;
+        width: 140px;
+    }
+
+    .list-info {
+        width: 100%;
+        padding-left: 20px;
+        border-top: 1px solid rgb(177, 177, 177);
+
+        .list-title {
+            margin: 5px 0 5px 0;
+            font-size: 16px;
+        }
+
+        .list-description {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            font-size: 13px;
+        }
+    }
+}
