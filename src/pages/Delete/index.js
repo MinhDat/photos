@@ -1,10 +1,12 @@
 import List from "component/List";
+import NoResult from "component/NoResult";
 import { useEffect, useState } from "react";
 import "./style.scss";
 
 export default function Delete({ setEnable }) {
   const [data, setData] = useState([]);
   const [sort, setSort] = useState("");
+  const [done, setDone] = useState(false);
 
   const onDelete = (item) => {
     let deletes = JSON.parse(localStorage.getItem("delete") || "[]");
@@ -31,6 +33,7 @@ export default function Delete({ setEnable }) {
 
     setTimeout(() => {
       setData(arrDelete);
+      setDone(true);
       if (setEnable) setEnable(false);
     }, waitTime);
   }, []);
@@ -58,7 +61,7 @@ export default function Delete({ setEnable }) {
     setSort(arrData);
   }, [sort]);
 
-  return (
+  return data.length ? (
     <div className="delete">
       <div className="flex end delete-select">
         <select onChange={(e) => setSort(e.target.value)}>
@@ -71,5 +74,7 @@ export default function Delete({ setEnable }) {
         <List {...{ item, key, index: key, onDelete }} />
       ))}
     </div>
+  ) : (
+    done && <NoResult />
   );
 }

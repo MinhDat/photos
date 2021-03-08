@@ -15,7 +15,7 @@ const Card = ({ item, onDelete }) => {
 
   const routerHistory = useHistory();
 
-  const handleLike = () => {
+  const handleLike = (e) => {
     let data = JSON.parse(localStorage.getItem("like") || "[]");
 
     if (isLike) {
@@ -26,15 +26,19 @@ const Card = ({ item, onDelete }) => {
 
     localStorage.setItem("like", JSON.stringify(data));
     setIsLike(!isLike);
+
+    e.stopPropagation();
   };
 
-  const handleRemove = () => {
+  const handleRemove = (e) => {
     let data = JSON.parse(localStorage.getItem("delete") || "[]");
 
     data.push(item);
 
     localStorage.setItem("delete", JSON.stringify(data));
     if (onDelete) onDelete(item);
+
+    e.stopPropagation();
   };
 
   const handleDetail = () => {
