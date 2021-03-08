@@ -24,6 +24,8 @@ function Home({ setEnable, searchText }) {
       (item) => item.data[0].nasa_id
     );
 
+    const objView = JSON.parse(localStorage.getItem("view") || "{}");
+
     const arrRemove = JSON.parse(localStorage.getItem("delete") || "[]").map(
       (item) => item.data[0].nasa_id
     );
@@ -37,7 +39,8 @@ function Home({ setEnable, searchText }) {
     for (let i = 0; i < filterData.length; i++) {
       const item = {
         ...filterData[i],
-        like: arrLike.includes(data[i].data[0].nasa_id),
+        like: arrLike.includes(filterData[i].data[0].nasa_id),
+        view: objView[filterData[i].data[0].nasa_id] || 0,
       };
       const index = (i + page * limit) % columnLength;
       if (arrTmp[index]) arrTmp[index].push(item);

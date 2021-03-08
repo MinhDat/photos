@@ -4,6 +4,7 @@ import "./style.scss";
 
 export default function Delete({ setEnable }) {
   const [data, setData] = useState([]);
+  const [sort, setSort] = useState("");
 
   const onDelete = (item) => {
     let deletes = JSON.parse(localStorage.getItem("delete") || "[]");
@@ -34,8 +35,38 @@ export default function Delete({ setEnable }) {
     }, waitTime);
   }, []);
 
+  useEffect(() => {
+    let arrData = data || [];
+    switch (sort) {
+      case "newest":
+        arrData.sort(
+          (a, b) =>
+            new Date(b.data[0].date_created) - new Date(a.data[0].date_created)
+        );
+        break;
+
+      case "lastest":
+        arrData.sort(
+          (a, b) =>
+            new Date(a.data[0].date_created) - new Date(b.data[0].date_created)
+        );
+        break;
+
+      default:
+        break;
+    }
+    setSort(arrData);
+  }, [sort]);
+
   return (
     <div className="delete">
+      <div className="flex end delete-select">
+        <select onChange={(e) => setSort(e.target.value)}>
+          <option value="">None</option>
+          <option value="newest">Newest</option>
+          <option value="lastest">Lastest</option>
+        </select>
+      </div>
       {data.map((item, key) => (
         <List {...{ item, key, index: key, onDelete }} />
       ))}
