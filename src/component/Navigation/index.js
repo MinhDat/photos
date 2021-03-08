@@ -7,7 +7,7 @@ export default function Navigation({ setSearchText }) {
   return (
     <div className="nav-wrap flex spaceBetween">
       <div className="nav-left-wrap flex itemCenter">
-        <Link to="/photos" className="nav-link flex itemCenter">
+        <Link to="/photos/" className="nav-link flex itemCenter">
           <img
             className="nav-logo"
             src={require("resources/img/logo.svg").default}
