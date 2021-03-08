@@ -22,11 +22,11 @@ const Card = ({ item, onDelete }) => {
   };
 
   const handleRemove = () => {
-    let data = JSON.parse(localStorage.getItem("remove") || "[]");
+    let data = JSON.parse(localStorage.getItem("delete") || "[]");
 
     data.push(item);
 
-    localStorage.setItem("remove", JSON.stringify(data));
+    localStorage.setItem("delete", JSON.stringify(data));
     if (onDelete) onDelete(item);
   };
 

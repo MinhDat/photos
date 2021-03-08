@@ -24,7 +24,7 @@ function Home({ setEnable, searchText }) {
       (item) => item.data[0].nasa_id
     );
 
-    const arrRemove = JSON.parse(localStorage.getItem("remove") || "[]").map(
+    const arrRemove = JSON.parse(localStorage.getItem("delete") || "[]").map(
       (item) => item.data[0].nasa_id
     );
 
@@ -67,7 +67,7 @@ function Home({ setEnable, searchText }) {
     ) {
       // Do load more content here!
       setPage(page + 1);
-      setEnable(true);
+      if (setEnable) setEnable(true);
     }
   };
 
@@ -85,7 +85,7 @@ function Home({ setEnable, searchText }) {
         waitTime = sleepTime - (currentTime - startTime);
         setTimeout(() => {
           handleData(res?.collection?.items);
-          setEnable(false);
+          if (setEnable) setEnable(false);
           window.removeEventListener("scroll", loadMore);
           window.addEventListener("scroll", loadMore);
         }, waitTime);
@@ -93,7 +93,7 @@ function Home({ setEnable, searchText }) {
   };
 
   useEffect(() => {
-    setEnable(true);
+    if (setEnable) setEnable(true);
     setArrData([]);
   }, []);
 
@@ -104,7 +104,7 @@ function Home({ setEnable, searchText }) {
   useEffect(() => {
     if (enableSearch) {
       setArrData([]);
-      setEnable(true);
+      if (setEnable) setEnable(true);
       if (page !== 1) setPage(1);
       else loadData();
     } else {
