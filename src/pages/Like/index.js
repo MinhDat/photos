@@ -26,7 +26,7 @@ export default function Like({ setEnable }) {
   return (
     <div className="like">
       {data.map((item, key) => (
-        <List {...{ item, key }} />
+        <List {...{ item, key, index: key }} />
       ))}
     </div>
   );

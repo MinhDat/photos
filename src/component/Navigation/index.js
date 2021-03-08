@@ -10,15 +10,15 @@ export default function Navigation({ setSearchText }) {
         <Link to="/" className="nav-link flex itemCenter">
           <img
             className="nav-logo"
-            src={require("resources/logo.svg").default}
+            src={require("resources/img/logo.svg").default}
           />
           <h1 className="nav-title">Photos</h1>
         </Link>
         <Link to="/like" className="nav-link">
-          <p className="nav-title">Likes</p>
+          <p>Likes</p>
         </Link>
         <Link to="/delete" className="nav-link">
-          <p className="nav-title">Deletes</p>
+          <p>Deletes</p>
         </Link>
       </div>
 

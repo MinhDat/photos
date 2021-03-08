@@ -5,6 +5,17 @@ import "./style.scss";
 export default function Delete({ setEnable }) {
   const [data, setData] = useState([]);
 
+  const onDelete = (item) => {
+    let deletes = JSON.parse(localStorage.getItem("delete") || "[]");
+
+    deletes = deletes.filter(
+      (obj) => obj.data[0].nasa_id !== item.data[0].nasa_id
+    );
+
+    localStorage.setItem("delete", JSON.stringify(deletes));
+    setData(deletes);
+  };
+
   useEffect(() => {
     if (setEnable) setEnable(true);
 
@@ -26,7 +37,7 @@ export default function Delete({ setEnable }) {
   return (
     <div className="delete">
       {data.map((item, key) => (
-        <List {...{ item, key }} />
+        <List {...{ item, key, index: key, onDelete }} />
       ))}
     </div>
   );
