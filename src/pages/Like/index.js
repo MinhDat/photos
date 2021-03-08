@@ -1,10 +1,12 @@
 import List from "component/List";
+import NoResult from "component/NoResult";
 import { useEffect, useState } from "react";
 import "./style.scss";
 
 export default function Like({ setEnable }) {
   const [data, setData] = useState([]);
   const [sort, setSort] = useState("");
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
     if (setEnable) setEnable(true);
@@ -20,6 +22,7 @@ export default function Like({ setEnable }) {
 
     setTimeout(() => {
       setData(arrLike);
+      setDone(true);
       if (setEnable) setEnable(false);
     }, waitTime);
   }, []);
@@ -47,7 +50,7 @@ export default function Like({ setEnable }) {
     setSort(arrData);
   }, [sort]);
 
-  return (
+  return data.length ? (
     <div className="like">
       <div className="flex end like-select">
         <select onChange={(e) => setSort(e.target.value)}>
@@ -60,5 +63,7 @@ export default function Like({ setEnable }) {
         <List {...{ item, key, index: key }} />
       ))}
     </div>
+  ) : (
+    done && <NoResult />
   );
 }

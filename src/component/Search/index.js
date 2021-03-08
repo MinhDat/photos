@@ -6,7 +6,7 @@ const Search = ({ setSearchText }) => {
   return (
     <input
       className="search"
-      placeholder="Search image"
+      placeholder="Search everything..."
       onChange={handleChange}
     />
   );

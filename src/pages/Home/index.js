@@ -9,12 +9,14 @@ import useDebounce from "hooks/debounce";
 import Card from "component/Card";
 
 import "./style.scss";
+import NoResult from "component/NoResult";
 
 function Home({ setEnable, searchText }) {
   const [arrData, setArrData] = useState([]);
   const [page, setPage] = useState(1);
   const [enableSearch, setEnableSearch] = useState(false);
   const [limit] = useState(100);
+  const [done, setDone] = useState(false);
 
   const debouncedSearchTerm = useDebounce(searchText, 350);
 
@@ -48,6 +50,7 @@ function Home({ setEnable, searchText }) {
     }
 
     setArrData(arrTmp);
+    setDone(true);
   };
 
   const onDelete = (data) => {
@@ -98,6 +101,7 @@ function Home({ setEnable, searchText }) {
   useEffect(() => {
     if (setEnable) setEnable(true);
     setArrData([]);
+    setDone(false);
   }, []);
 
   useEffect(() => {
@@ -106,6 +110,7 @@ function Home({ setEnable, searchText }) {
 
   useEffect(() => {
     if (enableSearch) {
+      setDone(false);
       setArrData([]);
       if (setEnable) setEnable(true);
       if (page !== 1) setPage(1);
@@ -115,7 +120,7 @@ function Home({ setEnable, searchText }) {
     }
   }, [debouncedSearchTerm]);
 
-  return (
+  return arrData.length ? (
     <div className="home flex row center">
       {arrData.map((data, key) => (
         <div {...{ key }}>
@@ -125,6 +130,8 @@ function Home({ setEnable, searchText }) {
         </div>
       ))}
     </div>
+  ) : (
+    done && <NoResult />
   );
 }
 
