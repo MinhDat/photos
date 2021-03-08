@@ -6,6 +6,7 @@ import Spinner from "component/Spinner";
 import Home from "pages/Home";
 import Like from "pages/Like";
 import Delete from "pages/Delete";
+import Detail from "pages/Detail";
 
 import "utils/global.scss";
 
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route path="/delete">
             <Delete {...{ setEnable }} />
+          </Route>
+          <Route path="/detail">
+            <Detail {...{ setEnable }} />
           </Route>
           <Route path="/">
             <Home {...{ setEnable, searchText }} />

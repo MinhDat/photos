@@ -4,6 +4,7 @@ import "./style.scss";
 
 export default function Like({ setEnable }) {
   const [data, setData] = useState([]);
+  const [sort, setSort] = useState("");
 
   useEffect(() => {
     if (setEnable) setEnable(true);
@@ -23,8 +24,38 @@ export default function Like({ setEnable }) {
     }, waitTime);
   }, []);
 
+  useEffect(() => {
+    let arrData = data || [];
+    switch (sort) {
+      case "newest":
+        arrData.sort(
+          (a, b) =>
+            new Date(b.data[0].date_created) - new Date(a.data[0].date_created)
+        );
+        break;
+
+      case "lastest":
+        arrData.sort(
+          (a, b) =>
+            new Date(a.data[0].date_created) - new Date(b.data[0].date_created)
+        );
+        break;
+
+      default:
+        break;
+    }
+    setSort(arrData);
+  }, [sort]);
+
   return (
     <div className="like">
+      <div className="flex end like-select">
+        <select onChange={(e) => setSort(e.target.value)}>
+          <option value="">None</option>
+          <option value="newest">Newest</option>
+          <option value="lastest">Lastest</option>
+        </select>
+      </div>
       {data.map((item, key) => (
         <List {...{ item, key, index: key }} />
       ))}

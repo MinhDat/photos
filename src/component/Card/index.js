@@ -1,12 +1,19 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+
 import { AiOutlineHeart, AiTwotoneHeart } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { BsFillEyeFill } from "react-icons/bs";
+
+import { nFormatter } from "utils/common";
+
 import "./style.scss";
 
 const Card = ({ item, onDelete }) => {
   const [isLike, setIsLike] = useState(item.like);
+
+  const routerHistory = useHistory();
 
   const handleLike = () => {
     let data = JSON.parse(localStorage.getItem("like") || "[]");
@@ -30,8 +37,19 @@ const Card = ({ item, onDelete }) => {
     if (onDelete) onDelete(item);
   };
 
+  const handleDetail = () => {
+    localStorage.setItem("showItem", JSON.stringify(item));
+
+    const data = JSON.parse(localStorage.getItem("view") || "{}");
+    data[item.data[0].nasa_id] = data[item.data[0].nasa_id]
+      ? data[item.data[0].nasa_id] + 1
+      : 1;
+    localStorage.setItem("view", JSON.stringify(data));
+    routerHistory.push("/detail");
+  };
+
   return (
-    <div className="card-wrap">
+    <div className="card-wrap" onClick={handleDetail}>
       <div className="card-info flex column spaceBetween">
         <div className="flex spaceBetween">
           <div onClick={handleLike}>
@@ -47,8 +65,9 @@ const Card = ({ item, onDelete }) => {
         </div>
         <div className="flex spaceBetween">
           <p className="card-title flex">{item.data[0].title}</p>
-          <span className="card-view">
-            611 <BsFillEyeFill />
+          <span className="flex itemCenter">
+            <p className="card-view">{nFormatter(item.view, 1)}</p>
+            <BsFillEyeFill className="card-eye" />
           </span>
         </div>
       </div>

@@ -1,0 +1,23 @@
+.detail {
+    margin: 80px 150px 0 150px;
+    .detail-left {
+        width: 30%;
+    }
+
+    .detail-right {
+        margin-left: 20px;
+        width: 70%;
+
+        .detail-date {
+            margin: 0 0 5px 0;
+            font-size: 11px;
+            font-style: italic;
+        }
+
+        .detail-info {
+            margin: 0;
+            font-size: 13px;
+        }
+    }
+    
+}
